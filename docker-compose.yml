@@ -8,8 +8,8 @@ services:
       - ./server/:/home/node/app
     command: ash -c "npm i && node index.js"
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.registry.rule=Host(`drop.surpuissant.com`)"
-      - "traefik.http.routers.registry.entrypoints=websecure"
-      - "traefik.http.routers.registry.tls.certresolver=letsencrypt"
-      - "traefik.http.services.drop.loadbalancer.server.port: 3000"
+      traefik.enable: true
+      traefik.http.routers.drop.rule: Host('drop.surpuissant.com')
+      traefik.http.routers.drop.entrypoints: websecure
+      traefik.http.routers.drop.tls.certresolver: "letsencrypt"
+      traefik.http.services.drop.loadbalancer.server.port: 3000
