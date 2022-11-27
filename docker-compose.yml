@@ -10,11 +10,10 @@ services:
       - TZ=Europe/London
     volumes:
       - ./:/config
-    ports:
-      - "80:3000"
     restart: unless-stopped
     labels:
       traefik.enable: true
       traefik.http.routers.snapdrop.rule: Host(`drop.surpuissant.com`)
       traefik.http.routers.snapdrop.entrypoints: websecure
       traefik.http.routers.snapdrop.tls.certresolver: "letsencrypt"
+      traefik.http.services.snapdrop.loadbalancer.server.port: 3000
