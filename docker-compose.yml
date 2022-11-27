@@ -18,8 +18,13 @@ services:
       - ./docker/certs:/etc/ssl/certs
       - ./docker/openssl:/mnt/openssl
     ports:
-      - "8080:80"
+      - "80:80"
       - "443:443"
     env_file: ./docker/fqdn.env
     entrypoint: /mnt/openssl/create.sh
     command: ["nginx", "-g", "daemon off;"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.registry.rule=Host(`drop.surpuissant.com`)"
+      - "traefik.http.routers.registry.entrypoints=websecure"
+      - "traefik.http.routers.registry.tls.certresolver=letsencrypt"
