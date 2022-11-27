@@ -7,9 +7,10 @@ services:
     volumes:
       - ./server/:/home/node/app
     command: ash -c "npm i && node index.js"
+    ports:
+      - '3000:3001'
     labels:
       traefik.enable: true
       traefik.http.routers.drop.rule: Host(`drop.surpuissant.com`)
       traefik.http.routers.drop.entrypoints: websecure
       traefik.http.routers.drop.tls.certresolver: "letsencrypt"
-      traefik.http.services.drop.loadbalancer.server.port: 3000
