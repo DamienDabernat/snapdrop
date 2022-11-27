@@ -10,6 +10,8 @@ services:
       - TZ=Europe/London
     volumes:
       - ./:/config
+    networks:
+      - traefik-public
     restart: unless-stopped
     labels:
       traefik.enable: true
@@ -17,3 +19,7 @@ services:
       traefik.http.routers.snapdrop.entrypoints: websecure
       traefik.http.routers.snapdrop.tls.certresolver: "letsencrypt"
       traefik.http.services.snapdrop.loadbalancer.server.port: 3000
+
+networks:
+  traefik-public:
+    external: true
