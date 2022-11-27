@@ -1,15 +1,13 @@
 version: "3"
 
 services:
-  snapdrop:
-    image: lscr.io/linuxserver/snapdrop:latest
-    container_name: snapdrop
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
+  node:
+    image: "node:lts-alpine"
+    user: "node"
+    working_dir: /home/node/app
     volumes:
-      - ./:/config
+      - ./server/:/home/node/app
+    command: ash -c "npm i && node index.js"
     networks:
       - traefik-public
     ports:
@@ -20,7 +18,7 @@ services:
       traefik.http.routers.snapdrop.rule: Host(`drop.surpuissant.com`)
       traefik.http.routers.snapdrop.entrypoints: websecure
       traefik.http.routers.snapdrop.tls.certresolver: "letsencrypt"
-      traefik.http.services.snapdrop.loadbalancer.server.port: 3000
+      #traefik.http.services.snapdrop.loadbalancer.server.port: 3000
 
 networks:
   traefik-public:
