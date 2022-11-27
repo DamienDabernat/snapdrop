@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   snapdrop:
     image: lscr.io/linuxserver/snapdrop:latest
@@ -8,7 +9,7 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - <path to config>:/config
+      - ./:/config
     ports:
       - "80:80"
       - "443:443"
