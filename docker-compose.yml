@@ -10,6 +10,8 @@ services:
     volumes:
       - ./server/:/home/node/app
     command: ash -c "npm i && node index.js"
+    networks:
+      - snapdrop
 
   nginx:
     build:
@@ -29,6 +31,7 @@ services:
     command: ["nginx", "-g", "daemon off;"]
     networks:
       - traefik-public
+      - snapdrop
     restart: unless-stopped
     labels:
       traefik.enable: true
@@ -38,5 +41,7 @@ services:
       traefik.http.services.snapdrop.loadbalancer.server.port: 3000
 
 networks:
+  snapdrop:
+    driver: bridge
   traefik-public:
     external: true
