@@ -23,8 +23,8 @@ services:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./docker/certs:/etc/ssl/certs
       - ./docker/openssl:/mnt/openssl
-    ports:
-      - "8000:80"
+    #ports:
+    #  - "8000:80"
     #  - "3001:443"
     env_file: ./docker/fqdn.env
     entrypoint: /mnt/openssl/create.sh
@@ -38,7 +38,7 @@ services:
       traefik.http.routers.snapdrop.rule: Host(`drop.surpuissant.com`)
       traefik.http.routers.snapdrop.entrypoints: websecure
       traefik.http.routers.snapdrop.tls.certresolver: "letsencrypt"
-      traefik.http.services.snapdrop.loadbalancer.server.port: 8000
+      #traefik.http.services.snapdrop.loadbalancer.server.port: 8000
 
 networks:
   snapdrop:
