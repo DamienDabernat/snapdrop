@@ -24,7 +24,7 @@ services:
       - ./docker/certs:/etc/ssl/certs
       - ./docker/openssl:/mnt/openssl
     env_file: ./docker/fqdn.env
-    entrypoint: /mnt/openssl/create.sh
+    #entrypoint: /mnt/openssl/create.sh
     command: ["nginx", "-g", "daemon off;"]
     networks:
       - traefik-public
