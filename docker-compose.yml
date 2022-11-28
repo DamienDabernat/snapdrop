@@ -33,6 +33,8 @@ services:
       - traefik-public
       - snapdrop
     restart: unless-stopped
+    ports:
+      - "3001:80"
     labels:
       traefik.enable: true
       traefik.http.routers.snapdrop.rule: Host(`drop.surpuissant.com`)
