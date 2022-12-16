@@ -50,3 +50,8 @@ networks:
     driver: bridge
   traefik-public:
     external: true
+  web:
+    external:
+      name: web
+  internal:
+    driver: bridge
