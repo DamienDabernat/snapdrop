@@ -41,7 +41,8 @@ services:
       traefik.http.routers.snapdrop.rule: Host(`drop.surpuissant.com`)
       traefik.http.routers.snapdrop.entrypoints: websecure
       traefik.http.routers.snapdrop.tls.certresolver: "letsencrypt"
-      traefik.http.services.snapdrop.loadbalancer.server.port: 80
+      traefik.docker.network: web
+      #traefik.http.services.snapdrop.loadbalancer.server.port: 80
 
 
 networks:
