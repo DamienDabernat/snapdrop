@@ -11,12 +11,13 @@ services:
       - ./server/:/home/node/app
     command: ash -c "npm i && node index.js"
     networks:
+      - traefik-public
       - snapdrop
 
   nginx:
     build:
-      context: ./docker/
-      dockerfile: nginx-with-openssl.Dockerfile
+      context: docker
+      dockerfile: docker/nginx-with-openssl.Dockerfile
     image: "nginx-with-openssl"
     volumes:
       - ./client:/usr/share/nginx/html
@@ -26,7 +27,7 @@ services:
     #ports:
     #  - "8000:80"
     #  - "3001:443"
-    env_file: ./docker/fqdn.env
+    env_file: docker/fqdn.env
     #entrypoint: /mnt/openssl/create.sh
     command: ["nginx", "-g", "daemon off;"]
     networks:
